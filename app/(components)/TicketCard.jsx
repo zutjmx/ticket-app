@@ -18,8 +18,16 @@ const TicketCard = () => {
         Esta es la descripción del ticket. 
         Aquí se puede escribir información detallada sobre el problema o la solicitud que se está reportando.
       </p>
-      <ProgressDisplay />
-      <StatusDisplay />      
+      <div className="grow"></div>
+      <div className="flex mt-2">
+        <div className="flex flex-col">
+          <p className="my-1 text-xs">17/10/2026 16:35</p>
+          <ProgressDisplay />
+        </div>
+        <div className="ml-auto flex items-end">
+          <StatusDisplay />
+        </div>
+      </div>      
     </div>
   )
 }
