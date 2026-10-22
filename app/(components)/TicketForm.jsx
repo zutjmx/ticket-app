@@ -15,6 +15,29 @@ const TicketForm = () => {
         category: 'Hardware Issue',
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const response = await fetch('/api/Tickets', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+            const newTicket = await response.json();
+            console.log('Ticket created:', newTicket);
+            router.refresh(); // Refresh the current route to fetch the latest tickets
+            router.push('/');
+        } else {
+            console.error('Failed to create ticket');
+            throw new Error('Failed to create ticket');
+        }
+        
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -27,7 +50,7 @@ const TicketForm = () => {
 
     return (
         <div className="flex justify-center">
-            <form className="flex flex-col gap-4 w-1/2">
+            <form className="flex flex-col gap-3 w-1/2" method="POST" onSubmit={handleSubmit}>
                 <h3 className="text-2xl font-bold mb-4">Create a New Ticket</h3>
                 <label htmlFor="title">Title:</label>
                 <input
@@ -43,7 +66,19 @@ const TicketForm = () => {
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
+                    rows={4}
                 />
+                <label htmlFor="category">Category:</label>
+                <select
+                    id="category"
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                >
+                    <option value="Hardware Issue">Hardware Issue</option>
+                    <option value="Software Issue">Software Issue</option>
+                    <option value="Network Issue">Network Issue</option>
+                </select>
                 <label htmlFor="priority">Priority:</label>
                 <select
                     id="priority"
@@ -57,9 +92,11 @@ const TicketForm = () => {
                 </select>
                 <label htmlFor="progress">Progress:</label>
                 <input
-                    type="number"
+                    type="range"
                     id="progress"
                     name="progress"
+                    min="0"
+                    max="100"
                     value={formData.progress}
                     onChange={handleChange}
                 />
@@ -74,6 +111,11 @@ const TicketForm = () => {
                     <option value="in progress">In Progress</option>
                     <option value="completed">Completed</option>
                 </select>
+
+                <input type="submit" 
+                    value="Create Ticket" 
+                    className="btn max-w-xs self-center" 
+                />
             </form>
         </div>
     )
