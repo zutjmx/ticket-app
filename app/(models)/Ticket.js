@@ -1,5 +1,8 @@
 import mongoose, {Schema} from "mongoose";
-import { act } from "react";
+import { React } from "react";
+
+import dns from "node:dns/promises";
+dns.setServers(["1.1.1.1"]);
 
 mongoose.connect(process.env.MONGODB_URI);
 
