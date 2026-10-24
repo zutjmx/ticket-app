@@ -2,6 +2,7 @@
 
 import {useRouter} from 'next/navigation'
 import React, {useState} from 'react'
+import Swal from 'sweetalert2'
 
 const TicketForm = () => {
     const router = useRouter();
@@ -18,6 +19,15 @@ const TicketForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        Swal.fire({
+            title: 'Creating Ticket...',
+            text: 'Please wait while we create your ticket.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
         const response = await fetch('/api/Tickets', {
             method: 'POST',
             headers: {
@@ -28,11 +38,21 @@ const TicketForm = () => {
 
         if (response.ok) {
             const newTicket = await response.json();
-            console.log('Ticket created:', newTicket);
+            Swal.fire({
+                icon: 'success',
+                title: 'Ticket created successfully',
+                text: 'Your ticket has been created.',
+            });
+            Swal.close(); // Close the loading dialog
             router.refresh(); // Refresh the current route to fetch the latest tickets
             router.push('/');
         } else {
-            console.error('Failed to create ticket');
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to create ticket',
+                text: 'Please try again later.',
+            });
+            Swal.close(); // Close the loading dialog
             throw new Error('Failed to create ticket');
         }
         
