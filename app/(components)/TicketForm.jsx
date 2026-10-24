@@ -43,7 +43,6 @@ const TicketForm = () => {
                 title: 'Ticket created successfully',
                 text: 'Your ticket has been created.',
             });
-            Swal.close(); // Close the loading dialog
             router.refresh(); // Refresh the current route to fetch the latest tickets
             router.push('/');
         } else {
@@ -52,7 +51,6 @@ const TicketForm = () => {
                 title: 'Failed to create ticket',
                 text: 'Please try again later.',
             });
-            Swal.close(); // Close the loading dialog
             throw new Error('Failed to create ticket');
         }
         
