@@ -1,10 +1,10 @@
 import Ticket from "../../(models)/Ticket";
 import { NextResponse } from "next/server";
 
-export async function GET(request) {
+export async function GET() {
   try {
     const tickets = await Ticket.find();
-    return NextResponse.json(tickets);
+    return NextResponse.json(tickets, { status: 200 });
   } catch (error) {
     console.error("Error fetching tickets:", error);
     return NextResponse.json({ error: "Failed to fetch tickets" }, { status: 500 });
