@@ -13,9 +13,13 @@ export async function GET({ params }) {
 
 export async function DELETE(req, { params }) {
     try {
-        console.log("DELETE request received for ticket ID:", params);
-        const { id } = params;
-        await Ticket.findByIdAndDelete(id);
+        const { id } = await params;
+        const deletedTicket = await Ticket.findByIdAndDelete(id);
+
+        if (!deletedTicket) {
+            return NextResponse.json({ message: "Ticket not found" }, { status: 404 });
+        }
+
         return NextResponse.json({ message: "Ticket deleted successfully" }, { status: 200 });
     } catch (error) {
         console.error("Error deleting ticket:", error);

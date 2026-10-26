@@ -24,7 +24,7 @@ const DeleteBlock = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         console.log("Deleting ticket with ID:", id);
-        const response = await fetch(`http://localhost:3000/api/Tickets/${id}`, {
+        const response = await fetch(`/api/Tickets/${id}`, {
           method: 'DELETE',
         });
 
