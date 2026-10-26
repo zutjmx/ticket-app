@@ -18,6 +18,12 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Descripción del video
+
+El video muestra cómo crear una aplicación de gestión de tickets con Next.js, Tailwind CSS y MongoDB. El proyecto permite organizar los tickets por categoría y consultar su prioridad, estado y progreso, además de crear nuevos tickets. También presenta la estructura de la aplicación y la conexión con la base de datos.
+
+Referencia: [Next.js, Tailwind CSS, and MongoDB Project Tutorial – Ticketing App](https://youtu.be/H0vhkoXljq0?si=dqTX0TQkXPj01c0M)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
